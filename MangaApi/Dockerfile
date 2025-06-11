@@ -1,21 +1,18 @@
-# Usa la imagen oficial de .NET 9 SDK (preview o nightly)
-FROM mcr.microsoft.com/dotnet/sdk:9.0-preview AS build
-
+# Etapa de construcción
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
-# Copia los archivos del proyecto
-COPY . ./
-
-# Restaura paquetes
+# Copiamos los archivos del proyecto
+COPY *.csproj ./
 RUN dotnet restore
 
-# Publica el proyecto en modo release
+COPY . ./
 RUN dotnet publish -c Release -o out
 
-# Imagen final con runtime
-FROM mcr.microsoft.com/dotnet/aspnet:9.0-preview AS runtime
-
+# Etapa de ejecución
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
 WORKDIR /app
-COPY --from=build /app/out ./
+COPY --from=build /app/out .
 
+EXPOSE 80
 ENTRYPOINT ["dotnet", "MangaApi.dll"]
