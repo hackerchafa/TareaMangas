@@ -1,0 +1,30 @@
+## Archivos de build y temporales
+bin/
+obj/
+out/
+*.user
+*.lock.json
+
+## Visual Studio Code
+.vscode/
+*.code-workspace
+
+## Archivos de configuración sensible
+*.db
+.env
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+## Sistema operativo
+.DS_Store
+Thumbs.db
+
+## Archivos de log
+*.log
+
+## Otros
+*.suo
+*.pdb
+*.cache
+*.ide
